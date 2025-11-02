@@ -10,6 +10,8 @@ import { ArrowRight, Github, Star } from "lucide-react"
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import Navbar from "../Navbar";
+import { Router } from "next/router";
+import { redirect } from "next/dist/server/api-utils";
 
 // ============================================================================
 // BEAMS COMPONENT (3D Background)
@@ -492,27 +494,27 @@ export default function EtherealBeamsHero() {
 
             {/* Main Heading */}
             <h1 className="mb-6 text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
-              Create{" "}
+            Welcome to{" "}
               <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-                exceptional
+              IE(I) 
               </span>{" "}
-              experiences
-              <br />
-              that matter
+              Games
             </h1>
 
             {/* Subtitle */}
             <p className="mb-10 text-lg leading-8 text-white/80 sm:text-xl lg:text-2xl max-w-3xl mx-auto">
-              Transform your ideas into reality with our cutting-edge platform. Designed for creators, built for
-              performance, crafted for excellence.
+            Institute of Engineers (India) Student Chapter at Chitkara University, Punjab
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+              <Link href={'/games/spinner'}>
               <Button size="lg" className="shadow-2xl shadow-white/25 font-semibold">
-                Start Creating
+                Join Now
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
+              </Link>
+              
               <Button variant="outline" size="lg" className="font-semibold bg-transparent">
                 Learn More
               </Button>
@@ -521,12 +523,12 @@ export default function EtherealBeamsHero() {
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2">1M+</div>
+                <div className="text-3xl font-bold text-white mb-2">100+</div>
                 <div className="text-white/60 text-sm">Users</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-white mb-2">50+</div>
-                <div className="text-white/60 text-sm">Countries</div>
+                <div className="text-3xl font-bold text-white mb-2">India</div>
+                <div className="text-white/60 text-sm">punjab</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-white mb-2">24/7</div>

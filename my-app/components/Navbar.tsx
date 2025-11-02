@@ -11,7 +11,10 @@ export default function Navbar() {
           <div className="flex h-16 items-center justify-between">
             {/* Brand Name Only */}
             <div className="flex items-center">
-              <span className="text-xl font-bold text-white">Mysh UI</span>
+              <Link href={'/'}>
+              <span className="text-xl font-bold text-white">IEI</span>
+              </Link>
+              
             </div>
 
             {/* Glassmorphic Navigation Pills */}
@@ -23,7 +26,7 @@ export default function Navbar() {
                 Home
               </Link>
               <Link
-                href="games"
+                href="/games/spinner"
                 className="rounded-full px-4 py-2 text-sm font-medium text-white/90 transition-all hover:bg-white/10 hover:text-white"
               >
                 Games
