@@ -4,13 +4,14 @@ import { auth } from "@clerk/nextjs/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { roomId: string } }
+  context: { params: Promise<{ roomId: string }> }
 ) {
-  const { userId } = await auth(); // Get Clerk user
-  if (!userId)
+  const { userId } = await auth();
+  if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
-  const { roomId } = params;
+  const { roomId } = await context.params;
 
   const supabase = createClient(
     process.env.SUPABASE_URL!,
@@ -23,8 +24,9 @@ export async function GET(
     .eq("id", roomId)
     .single();
 
-  if (error || !room)
+  if (error || !room) {
     return NextResponse.json({ error: "Room not found" }, { status: 404 });
+  }
 
   return NextResponse.json({ room });
 }
