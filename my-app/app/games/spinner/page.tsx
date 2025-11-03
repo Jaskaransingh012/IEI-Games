@@ -24,11 +24,9 @@ export default function SpinnerGame(): React.ReactElement {
   const { isSignedIn, user } = useUser();
   const { signOut, openSignIn } = useClerk();
   const [segments] = useState<Segment[]>([
-    { id: 1, label: 'Prize 1', color: '#FF6B6B', probability: 20 },
-    { id: 2, label: 'Prize 2', color: '#4ECDC4', probability: 20 },
-    { id: 3, label: 'Prize 3', color: '#45B7D1', probability: 20 },
-    { id: 4, label: 'Prize 4', color: '#FFA07A', probability: 20 },
-    { id: 5, label: 'Prize 5', color: '#98D8C8', probability: 20 }
+    { id: 1, label: 'Perfume', color: '#FF6B6B', probability: 30 },
+    { id: 2, label: 'Laptop', color: '#4ECDC4', probability: 40 },
+    { id: 3, label: 'Clothing', color: '#45B7D1', probability: 30 },
   ]);
   
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
@@ -143,7 +141,7 @@ export default function SpinnerGame(): React.ReactElement {
 
   return (
     <div className="min-h-screen bg-black p-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto mt-20">
         {/* Header with User Info */}
        
 
@@ -285,25 +283,6 @@ export default function SpinnerGame(): React.ReactElement {
           )}
 
           {/* Stats Panel */}
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-5 gap-4 w-full max-w-2xl">
-            {segments.map((segment) => (
-              <div 
-                key={segment.id}
-                className="bg-gray-900 rounded-lg p-4 text-center border border-gray-800 hover:border-gray-600 transition-colors"
-              >
-                <div 
-                  className="w-8 h-8 rounded-full mx-auto mb-2 shadow-lg"
-                  style={{ backgroundColor: segment.color }}
-                ></div>
-                <div className="text-white font-medium text-sm truncate">
-                  {segment.label}
-                </div>
-                <div className="text-gray-400 text-xs">
-                  {segment.probability}%
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>
