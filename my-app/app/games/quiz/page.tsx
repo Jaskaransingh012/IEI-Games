@@ -31,14 +31,16 @@ export default function JoinRoomForm() {
 
     if (!roomId.trim()) return setError('Room ID is required')
     if (!password) return setError('Password is required')
+    
 
     try {
       setLoading(true)
       const data = await joinRoom(roomId.trim(), password)
 
       if (data.message === 'Already joined' || data.message === 'Joined successfully') {
+        sessionStorage.setItem(`room_access_${roomId}`, data.accessToken);
         // ✅ Redirect to room page
-        router.push(`/quiz/${data.room.id}`)
+        router.push(`/games/quiz/${data.room.id}`)
       } else {
         setError(data.error || 'Unexpected response')
       }

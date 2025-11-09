@@ -9,6 +9,7 @@ import {
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 
 import quizPic from '@/assets/ment-quiz/quiz.jpg'
+import spinnerPic from '@/assets/spinner/image.png'
 
 const features = [
   {
@@ -22,37 +23,37 @@ const features = [
   },
   {
     Icon: InputIcon,
-    name: "Full text search",
+    name: "Spinner",
     description: "Search through all your files in one place.",
-    href: "/",
-    cta: "Learn more",
-    background: <img className="absolute -right-20 -top-20 opacity-60" />,
+    href: "games/spinner",
+    cta: "Play Now",
+    background: <img src={spinnerPic.src} className="absolute h-40 w-full opacity-60" />,
     className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
   },
   {
     Icon: GlobeIcon,
-    name: "Multilingual",
-    description: "Supports 100+ languages and counting.",
-    href: "/",
+    name: "Coming Soon.......",
+    description: "Coming Soon....",
+    href: "",
     cta: "Learn more",
     background: <img className="absolute -right-20 -top-20 opacity-60" />,
     className: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4",
   },
   {
     Icon: CalendarIcon,
-    name: "Calendar",
-    description: "Use the calendar to filter your files by date.",
-    href: "/",
+    name: "Coming Soon.......",
+    description: "Coming Soon....",
+    href: "",
     cta: "Learn more",
     background: <img className="absolute -right-20 -top-20 opacity-60" />,
     className: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2",
   },
   {
     Icon: BellIcon,
-    name: "Notifications",
+    name: "Coming Soon..........",
     description:
-      "Get notified when someone shares a file or mentions you in a comment.",
-    href: "/",
+      "Coming Soon..........",
+    href: "",
     cta: "Learn more",
     background: <img className="absolute -right-20 -top-20 opacity-60" />,
     className: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4",

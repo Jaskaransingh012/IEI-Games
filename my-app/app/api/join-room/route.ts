@@ -14,13 +14,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
 
     const supabase = createClient(
-      process.env.SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_KEY!
     );
 
     // Step 1: Find the room
     const { data: room, error } = await supabase
-      .from("quiz")
+      .from("quizzes")
       .select("*")
       .eq("id", roomId)
       .single();
@@ -48,6 +48,7 @@ export async function POST(req: Request) {
     const users: any[] = room.users || [];
     const alreadyJoined = users.some((u) => u.userId === userId);
 
+
     if (alreadyJoined) {
       return NextResponse.json({ message: "Already joined", room });
     }
@@ -56,7 +57,7 @@ export async function POST(req: Request) {
     const updatedUsers = [...users, userObj];
 
     const { error: updateError } = await supabase
-      .from("quiz")
+      .from("quizzes")
       .update({ users: updatedUsers })
       .eq("id", roomId);
 
@@ -66,9 +67,12 @@ export async function POST(req: Request) {
         { status: 400 }
       );
 
+    const accessToken = Math.random().toString(36).substring(2);
+
     return NextResponse.json({
       message: "Joined successfully",
       room: { ...room, users: updatedUsers },
+      accessToken
     });
   } catch (err: any) {
     console.error("Error joining room:", err);
