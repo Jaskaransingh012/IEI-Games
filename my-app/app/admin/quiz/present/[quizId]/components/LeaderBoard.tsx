@@ -2,8 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Trophy, Medal, Award, Crown, Star, Zap, TrendingUp, Flame } from 'lucide-react';
 import { useParams } from 'next/navigation';
 
+// Types
+interface User {
+  image: string;
+  score: number;
+  userId: string;
+  username: string;
+}
+
+interface AnimatedScores {
+  [userId: string]: number;
+}
+
 // Demo data
-const DEMO_DATA = [
+const DEMO_DATA: User[] = [
   {
     image: "https://api.dicebear.com/7.x/avataaars/svg?seed=jaskaransingh012",
     score: 2450,
@@ -43,24 +55,24 @@ const DEMO_DATA = [
 ];
 
 export default function Leaderboard() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [animatedScores, setAnimatedScores] = useState({});
-  const [hoveredUser, setHoveredUser] = useState(null);
-  const [showConfetti, setShowConfetti] = useState(false);
-  const {quizId} = useParams();
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [animatedScores, setAnimatedScores] = useState<AnimatedScores>({});
+  const [hoveredUser, setHoveredUser] = useState<string | null>(null);
+  const [showConfetti, setShowConfetti] = useState<boolean>(false);
+  const { quizId } = useParams() as { quizId: string };
 
   useEffect(() => {
     fetchLeaderboardData();
   }, []);
 
-  const fetchLeaderboardData = async () => {
+  const fetchLeaderboardData = async (): Promise<void> => {
     try {
       // Try to fetch from API, fallback to demo data
       const response = await fetch('/api/quiz/' + quizId);
       const data = await response.json();
-      console.log("data",data);
-      const roomUsers = data.room?.users;
+      console.log("data", data);
+      const roomUsers = data.room?.users as User[];
       console.log(roomUsers);
       const sortedData = roomUsers.sort((a, b) => b.score - a.score);
       setUsers(sortedData);
@@ -72,8 +84,8 @@ export default function Leaderboard() {
     }
   };
 
-  const initializeAnimation = (data) => {
-    const initialScores = {};
+  const initializeAnimation = (data: User[]): void => {
+    const initialScores: AnimatedScores = {};
     data.forEach(user => {
       initialScores[user.userId] = 0;
     });
@@ -87,7 +99,7 @@ export default function Leaderboard() {
     }, 100);
   };
 
-  const animateScores = (userData) => {
+  const animateScores = (userData: User[]): void => {
     const duration = 2000;
     const fps = 60;
     const frames = duration / (1000 / fps);
@@ -98,7 +110,7 @@ export default function Leaderboard() {
       const progress = frame / frames;
       const easeProgress = easeOutCubic(progress);
 
-      const newScores = {};
+      const newScores: AnimatedScores = {};
       userData.forEach(user => {
         newScores[user.userId] = Math.round(user.score * easeProgress);
       });
@@ -106,7 +118,7 @@ export default function Leaderboard() {
 
       if (frame >= frames) {
         clearInterval(interval);
-        const finalScores = {};
+        const finalScores: AnimatedScores = {};
         userData.forEach(user => {
           finalScores[user.userId] = user.score;
         });
@@ -115,11 +127,11 @@ export default function Leaderboard() {
     }, 1000 / fps);
   };
 
-  const easeOutCubic = (t) => {
+  const easeOutCubic = (t: number): number => {
     return 1 - Math.pow(1 - t, 3);
   };
 
-  const getBarColor = (index) => {
+  const getBarColor = (index: number): string => {
     const colors = [
       'from-yellow-400 via-yellow-500 to-amber-600',
       'from-slate-300 via-slate-400 to-slate-500',
@@ -133,7 +145,7 @@ export default function Leaderboard() {
     return colors[index % colors.length];
   };
 
-  const getPodiumIcon = (position) => {
+  const getPodiumIcon = (position: number): React.ReactNode => {
     switch (position) {
       case 0:
         return <Crown className="w-8 h-8 text-yellow-400 animate-pulse" />;
@@ -357,11 +369,6 @@ export default function Leaderboard() {
                         </div>
                       </div>
                     </div>
-                    {/* {index < 3 && (
-                      <div className="w-12 flex justify-center group-hover:scale-125 transition-transform">
-                        {getPodiumIcon(index)}
-                      </div>
-                    )} */}
                   </div>
                 </div>
               </div>
