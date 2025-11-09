@@ -38,7 +38,7 @@ export default function AdminQuizPage() {
 
   // ⚡ initialize socket
   const [socket] = useState<Socket>(() =>
-    io('http://localhost:8080', { autoConnect: false, transports: ['websocket'] })
+    io('https://iei-games.onrender.com', { autoConnect: false, transports: ['websocket'] })
   );
 
   // 🧠 Fetch quiz

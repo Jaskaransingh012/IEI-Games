@@ -38,7 +38,7 @@ export default function ParticipantPage() {
     }
 
     // Initialize socket
-    const newSocket = io('http://localhost:8080', {
+    const newSocket = io('https://iei-games.onrender.com', {
       transports: ['websocket'],
     });
 
