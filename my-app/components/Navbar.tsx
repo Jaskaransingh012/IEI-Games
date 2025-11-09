@@ -26,7 +26,7 @@ export default function Navbar() {
                 Home
               </Link>
               <Link
-                href="/games/spinner"
+                href="/games"
                 className="rounded-full px-4 py-2 text-sm font-medium text-white/90 transition-all hover:bg-white/10 hover:text-white"
               >
                 Games

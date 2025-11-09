@@ -14,12 +14,12 @@ export async function GET(
   const { roomId } = await context.params;
 
   const supabase = createClient(
-    process.env.SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_KEY!
   );
 
   const { data: room, error } = await supabase
-    .from("quiz")
+    .from("quizzes")
     .select("*")
     .eq("id", roomId)
     .single();
