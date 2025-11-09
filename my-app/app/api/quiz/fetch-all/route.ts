@@ -3,8 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { auth } from "@clerk/nextjs/server";
 
 export async function GET(
-  req: Request,
-  context: { params: Promise<{ roomId: string }> }
+  req: Request
 ) {
   const { userId } = await auth();
   if (!userId) {
